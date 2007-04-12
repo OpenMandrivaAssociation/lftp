@@ -1,0 +1,111 @@
+%define	version	3.5.9
+%define	release	%mkrel 2
+%define	major	0
+%define	libname	%mklibname %{name} %{major}
+
+# build options
+%define	enable_dante	0
+%{?_with_dante: %define enable_dante 1}
+
+Summary:	Commandline ftp client
+Name:		lftp
+Version:	%{version}
+Release:	%{release}
+URL:		http://lftp.yar.ru/			
+Group:		Networking/File transfer
+License:	GPL
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
+Source0:	ftp://lftp.yar.ru/lftp/%{name}-%{version}.tar.bz2
+Source1:	ftp://lftp.yar.ru/lftp/%{name}-%{version}.tar.bz2.asc
+Patch0:		lftp-2.2.0-lftpgetmanpage.patch
+Patch1:		lftp-3.0.3-mdkconf.patch
+
+Requires:	less
+BuildRequires:	ncurses-devel
+BuildRequires:	gnutls-devel
+BuildRequires:	readline-devel
+BuildRequires:	expat-devel
+%if %enable_dante
+BuildRequires:	dante-devel
+%endif
+
+%description
+LFTP is a shell-like command line ftp client. The main two advantages
+over other ftp clients are reliability and ability to perform tasks
+in background. It will reconnect and reget the file being transferred
+if the connection broke. You can start a transfer in background and
+continue browsing on the ftp site.  It does this all in one process.
+When you have started background jobs and feel you are done, you can
+just exit lftp and it automatically moves to nohup mode and completes
+the transfers. It has also such nice features as reput and mirror.
+
+Build option:
+--with dante	Enable dante support
+
+%package -n	%{libname}
+Summary:	Dynamic libraries from %{name}
+Group:		System/Libraries
+
+%description -n	%{libname}
+Dynamic libraries from %{name}.
+
+%package -n	%{libname}-devel
+Summary:	Header files and static libraries from %{name}
+Group:		Development/C
+Requires:	%{libname} >= %{version}
+Provides:	lib%{name}-devel = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release} 
+Obsoletes:	%{name}-devel
+
+%description -n	%{libname}-devel
+Libraries and includes files for developing programs based on %{name}.
+
+%prep
+%setup -q
+%patch0 -p1 -b .manpage
+%patch1 -p1 -b .agent
+
+%build
+%configure2_5x \
+	--with-included-readline=no \
+	--with-modules=yes \
+	--with-pager="exec less" \
+%if %enable_dante
+	--with-socksdante=yes \
+%endif
+
+%make 
+
+%install
+rm -rf %{buildroot}
+%{makeinstall_std}
+
+%find_lang %{name}
+
+%clean
+rm -rf %{buildroot}
+
+%files -f %{name}.lang
+%defattr(-,root,root)
+%doc COPYING FAQ MIRRORS NEWS 
+%doc README.* THANKS TODO lftp.lsm BUGS
+%config(noreplace) %{_sysconfdir}/lftp.conf
+%{_bindir}/*
+%{_mandir}/man1/*
+%{_datadir}/%{name}/
+
+%files -n %{libname}
+%defattr(-,root,root)
+%{_libdir}/*.so.*
+%{_libdir}/lftp/%{version}/*.so
+
+%files -n %{libname}-devel
+%defattr(-,root,root)
+%{_libdir}/*.so
+%{_libdir}/*.la
+
+%post -n %{libname} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
+
+

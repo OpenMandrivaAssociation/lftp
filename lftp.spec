@@ -1,5 +1,5 @@
 %define	version	3.5.11
-%define	release	%mkrel 1
+%define	release	%mkrel 2
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 
@@ -15,12 +15,10 @@ URL:		http://lftp.yar.ru/
 Group:		Networking/File transfer
 License:	GPL
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
 Source0:	ftp://lftp.yar.ru/lftp/%{name}-%{version}.tar.bz2
 Source1:	ftp://lftp.yar.ru/lftp/%{name}-%{version}.tar.bz2.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.0.3-mdkconf.patch
-
 Requires:	less
 BuildRequires:	ncurses-devel
 BuildRequires:	gnutls-devel
@@ -40,17 +38,19 @@ When you have started background jobs and feel you are done, you can
 just exit lftp and it automatically moves to nohup mode and completes
 the transfers. It has also such nice features as reput and mirror.
 
+%if %enable_dante
 Build option:
 --with dante	Enable dante support
+%endif
 
-%package -n	%{libname}
+%package -n %{libname}
 Summary:	Dynamic libraries from %{name}
 Group:		System/Libraries
 
 %description -n	%{libname}
 Dynamic libraries from %{name}.
 
-%package -n	%{libname}-devel
+%package -n %{libname}-devel
 Summary:	Header files and static libraries from %{name}
 Group:		Development/C
 Requires:	%{libname} >= %{version}
@@ -79,9 +79,12 @@ Libraries and includes files for developing programs based on %{name}.
 
 %install
 rm -rf %{buildroot}
-%{makeinstall_std}
+%makeinstall_std
 
 %find_lang %{name}
+
+%post -n %{libname} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 
 %clean
 rm -rf %{buildroot}
@@ -97,15 +100,10 @@ rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/*.so.*
+%{_libdir}/*.so.%{major}*
 %{_libdir}/lftp/%{version}/*.so
 
 %files -n %{libname}-devel
 %defattr(-,root,root)
 %{_libdir}/*.so
 %{_libdir}/*.la
-
-%post -n %{libname} -p /sbin/ldconfig
-%postun -n %{libname} -p /sbin/ldconfig
-
-

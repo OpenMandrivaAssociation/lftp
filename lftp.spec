@@ -1,7 +1,8 @@
 %define	version	3.5.11
-%define	release	%mkrel 2
+%define	release	%mkrel 3
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
 
 # build options
 %define	enable_dante	0
@@ -50,15 +51,15 @@ Group:		System/Libraries
 %description -n	%{libname}
 Dynamic libraries from %{name}.
 
-%package -n %{libname}-devel
+%package -n %{develname}
 Summary:	Header files and static libraries from %{name}
 Group:		Development/C
-Requires:	%{libname} >= %{version}
+Requires:	%{libname} >= %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release} 
-Obsoletes:	%{name}-devel
+Obsoletes:	%{libname}-devel
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 Libraries and includes files for developing programs based on %{name}.
 
 %prep
@@ -103,7 +104,7 @@ rm -rf %{buildroot}
 %{_libdir}/*.so.%{major}*
 %{_libdir}/lftp/%{version}/*.so
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %{_libdir}/*.so
 %{_libdir}/*.la

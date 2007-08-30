@@ -1,4 +1,4 @@
-%define	version	3.5.12
+%define	version	3.5.13
 %define	release	%mkrel 1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
@@ -57,7 +57,7 @@ Group:		Development/C
 Requires:	%{libname} >= %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release} 
-Obsoletes:	%{libname}-devel
+Obsoletes:	%mklibname -d %name %major
 
 %description -n	%{develname}
 Libraries and includes files for developing programs based on %{name}.

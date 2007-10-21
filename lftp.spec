@@ -16,8 +16,8 @@ URL:		http://lftp.yar.ru/
 Group:		Networking/File transfer
 License:	GPL
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Source0:	ftp://lftp.yar.ru/lftp/%{name}-%{version}.tar.bz2
-Source1:	ftp://lftp.yar.ru/lftp/%{name}-%{version}.tar.bz2.asc
+Source0:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2
+Source1:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.0.3-mdkconf.patch
 Requires:	less

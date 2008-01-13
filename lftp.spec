@@ -1,5 +1,5 @@
 %define	version	3.6.1
-%define	release	%mkrel 1
+%define	release	%mkrel 2
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -14,7 +14,7 @@ Version:	%{version}
 Release:	%{release}
 URL:		http://lftp.yar.ru/			
 Group:		Networking/File transfer
-License:	GPL
+License:	GPLv2+
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2
 Source1:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2.asc

@@ -1,5 +1,5 @@
 %define	version	3.6.1
-%define	release	%mkrel 2
+%define	release	%mkrel 3
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -102,6 +102,7 @@ rm -rf %{buildroot}
 %files -n %{libname}
 %defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
+%dir %{_libdir}/lftp/%{version}
 %{_libdir}/lftp/%{version}/*.so
 
 %files -n %{develname}

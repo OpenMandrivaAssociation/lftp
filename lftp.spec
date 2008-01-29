@@ -1,5 +1,5 @@
-%define	version	3.6.1
-%define	release	%mkrel 3
+%define	version	3.6.3
+%define	release	%mkrel 1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d

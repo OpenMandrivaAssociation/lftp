@@ -1,4 +1,4 @@
-%define	version	3.7.2
+%define	version	3.7.3
 %define	release	%mkrel 1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
@@ -7,6 +7,9 @@
 # build options
 %define	enable_dante	0
 %{?_with_dante: %define enable_dante 1}
+
+#otherwise it won't build
+%define _disable_ld_no_undefined 1
 
 Summary:	Commandline ftp client
 Name:		lftp

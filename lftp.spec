@@ -1,5 +1,5 @@
 %define	version	3.7.3
-%define	release	%mkrel 1
+%define	release	%mkrel 2
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -7,9 +7,6 @@
 # build options
 %define	enable_dante	0
 %{?_with_dante: %define enable_dante 1}
-
-#otherwise it won't build
-%define _disable_ld_no_undefined 1
 
 Summary:	Commandline ftp client
 Name:		lftp
@@ -23,6 +20,7 @@ Source0:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2
 Source1:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.0.3-mdkconf.patch
+Patch2:		lftp-3.7.3-fix-libtool-usage.patch
 Requires:	less
 BuildRequires:	ncurses-devel
 BuildRequires:	gnutls-devel
@@ -69,6 +67,7 @@ Libraries and includes files for developing programs based on %{name}.
 %setup -q
 %patch0 -p1 -b .manpage
 %patch1 -p1 -b .agent
+%patch2 -p1 -b .module
 
 %build
 %configure2_5x \

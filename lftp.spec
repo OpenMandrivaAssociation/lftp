@@ -21,6 +21,7 @@ Source1:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2.
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.0.3-mdkconf.patch
 Patch2:		lftp-3.7.4-fix-libtool-usage.patch
+Patch3:		lftp-3.7.5-missing-headers.patch
 Requires:	less
 BuildRequires:	ncurses-devel
 BuildRequires:	gnutls-devel
@@ -68,6 +69,7 @@ Libraries and includes files for developing programs based on %{name}.
 %patch0 -p1 -b .manpage
 %patch1 -p1 -b .agent
 %patch2 -p1 -b .module
+%patch3 -p1 -b .headers
 
 %build
 %configure2_5x \

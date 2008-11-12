@@ -69,7 +69,7 @@ Libraries and includes files for developing programs based on %{name}.
 %patch0 -p1 -b .manpage
 %patch1 -p1 -b .agent
 %patch2 -p1 -b .module
-%patch3 -p1 -b .headers
+%patch3 -p0 -b .headers
 
 %build
 %configure2_5x \

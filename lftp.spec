@@ -1,4 +1,4 @@
-%define	version	3.7.6
+%define	version	3.7.7
 %define	release	%mkrel 1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
@@ -19,8 +19,9 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2
 Source1:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
-Patch1:		lftp-3.0.3-mdkconf.patch
+Patch1:		lftp-3.7.7-mdkconf.patch
 Patch2:		lftp-3.7.4-fix-libtool-usage.patch
+Patch3:		lftp-3.7.7-fix-str-fmt.patch
 Requires:	less
 BuildRequires:	ncurses-devel
 BuildRequires:	gnutls-devel
@@ -58,7 +59,7 @@ Group:		Development/C
 Requires:	%{libname} >= %{version}-%{release}
 Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release} 
-Obsoletes:	%mklibname -d %name %major
+Obsoletes:	%mklibname -d lftp 0
 
 %description -n	%{develname}
 Libraries and includes files for developing programs based on %{name}.
@@ -68,6 +69,7 @@ Libraries and includes files for developing programs based on %{name}.
 %patch0 -p1 -b .manpage
 %patch1 -p1 -b .agent
 %patch2 -p1 -b .module
+%patch3 -p0 -b .str
 
 %build
 %configure2_5x \

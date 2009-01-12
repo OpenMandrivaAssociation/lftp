@@ -73,7 +73,6 @@ Libraries and includes files for developing programs based on %{name}.
 
 %build
 %configure2_5x \
-	--with-included-readline=no \
 	--with-modules=yes \
 	--with-pager="exec less" \
 %if %enable_dante

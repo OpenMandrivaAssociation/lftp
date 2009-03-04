@@ -1,5 +1,5 @@
-%define	version	3.7.8
-%define	release	%mkrel 2
+%define	version	3.7.9
+%define	release	%mkrel 1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d

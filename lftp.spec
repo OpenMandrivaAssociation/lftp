@@ -1,5 +1,5 @@
 %define	version	3.7.13
-%define	release	%mkrel 1
+%define	release	%mkrel 2
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -22,6 +22,7 @@ Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
 Patch2:		lftp-3.7.4-fix-libtool-usage.patch
 Patch3:		lftp-3.7.13-fix-str-fmt.patch
+Patch4:		lftp-3.7.13-gnutls-2.8.patch
 Requires:	less
 BuildRequires:	ncurses-devel
 BuildRequires:	gnutls-devel
@@ -70,8 +71,10 @@ Libraries and includes files for developing programs based on %{name}.
 %patch1 -p1 -b .agent
 %patch2 -p1 -b .module
 %patch3 -p0 -b .str
+%patch4 -p0 -b .gnutls
 
 %build
+autoreconf -fi
 %configure2_5x \
 	--with-modules=yes \
 	--with-pager="exec less" \

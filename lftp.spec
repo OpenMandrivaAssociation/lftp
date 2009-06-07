@@ -1,5 +1,5 @@
-%define	version	3.7.13
-%define	release	%mkrel 2
+%define	version	3.7.14
+%define	release	%mkrel 1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -21,7 +21,7 @@ Source1:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2.
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
 Patch2:		lftp-3.7.4-fix-libtool-usage.patch
-Patch3:		lftp-3.7.13-fix-str-fmt.patch
+Patch3:		lftp-3.7.14-fix-str-fmt.patch
 Patch4:		lftp-3.7.13-gnutls-2.8.patch
 Requires:	less
 BuildRequires:	ncurses-devel

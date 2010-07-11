@@ -1,4 +1,4 @@
-%define	version	4.0.7
+%define	version	4.0.9
 %define	release	%mkrel 1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
@@ -103,7 +103,7 @@ rm -rf %{buildroot}
 %doc README.* THANKS TODO lftp.lsm BUGS
 %config(noreplace) %{_sysconfdir}/lftp.conf
 %{_bindir}/*
-%{_mandir}/man1/*
+%{_mandir}/man?/*
 %{_datadir}/%{name}/
 
 %files -n %{libname}

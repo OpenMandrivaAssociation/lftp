@@ -1,4 +1,4 @@
-%define	version	4.1.3
+%define	version 4.2.0
 %define	release	%mkrel 1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
@@ -20,7 +20,6 @@ Source0:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2
 Source1:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
-Patch2:		lftp-4.0.4-fix-libtool-usage.patch
 Patch3:		lftp-3.7.14-fix-str-fmt.patch
 Requires:	less
 BuildRequires:	ncurses-devel
@@ -68,7 +67,6 @@ Libraries and includes files for developing programs based on %{name}.
 %setup -q
 %patch0 -p1 -b .manpage
 %patch1 -p1 -b .agent
-%patch2 -p1 -b .module
 %patch3 -p0 -b .str
 
 %build

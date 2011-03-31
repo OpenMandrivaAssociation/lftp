@@ -1,4 +1,4 @@
-%define	version 4.2.0
+%define	version 4.2.1
 %define	release	%mkrel 1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}

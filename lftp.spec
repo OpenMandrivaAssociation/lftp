@@ -1,5 +1,5 @@
-%define	version 4.3.1
-%define	release	%mkrel 1
+%define	version 4.3.4
+%define	release	1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -15,7 +15,6 @@ Release:	%{release}
 URL:		http://lftp.yar.ru/			
 Group:		Networking/File transfer
 License:	GPLv2+
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Source0:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2
 Source1:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
@@ -82,23 +81,11 @@ Libraries and includes files for developing programs based on %{name}.
 %make 
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 %find_lang %{name}
 
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc COPYING FAQ MIRRORS NEWS 
 %doc README.* THANKS TODO lftp.lsm BUGS
 %config(noreplace) %{_sysconfdir}/lftp.conf
@@ -107,12 +94,9 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/*.so.%{major}*
 %dir %{_libdir}/lftp/%{version}
 %{_libdir}/lftp/%{version}/*.so
 
 %files -n %{develname}
-%defattr(-,root,root)
 %{_libdir}/*.so
-%{_libdir}/*.la

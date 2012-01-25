@@ -100,5 +100,3 @@ Libraries and includes files for developing programs based on %{name}.
 
 %files -n %{develname}
 %{_libdir}/*.so
-%{_libdir}/liblftp-jobs.la
-%{_libdir}/liblftp-tasks.la

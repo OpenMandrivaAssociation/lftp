@@ -1,4 +1,4 @@
-%define	version 4.3.4
+%define	version 4.3.5
 %define	release	1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
@@ -100,3 +100,5 @@ Libraries and includes files for developing programs based on %{name}.
 
 %files -n %{develname}
 %{_libdir}/*.so
+%{_libdir}/liblftp-jobs.la
+%{_libdir}/liblftp-tasks.la

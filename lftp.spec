@@ -1,5 +1,3 @@
-%define	version 4.3.5
-%define	release	1
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
@@ -10,8 +8,8 @@
 
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	%{version}
-Release:	%{release}
+Version:	4.3.5
+Release:	2
 URL:		http://lftp.yar.ru/			
 Group:		Networking/File transfer
 License:	GPLv2+
@@ -23,7 +21,7 @@ Patch2:		lftp-4.2.0-link.patch
 Patch3:		lftp-3.7.14-fix-str-fmt.patch
 Requires:	less
 BuildRequires:	ncurses-devel
-BuildRequires:	gnutls-devel
+BuildRequires:	gnutls-devel >= 3.0
 BuildRequires:	readline-devel
 BuildRequires:	expat-devel
 %if %enable_dante

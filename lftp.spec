@@ -8,8 +8,8 @@
 
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	4.3.5
-Release:	2
+Version:	4.3.7
+Release:	1
 URL:		http://lftp.yar.ru/			
 Group:		Networking/File transfer
 License:	GPLv2+
@@ -66,7 +66,6 @@ Libraries and includes files for developing programs based on %{name}.
 %patch0 -p1 -b .manpage
 %patch1 -p1 -b .agent
 %patch2 -p1 -b .link
-%patch3 -p0 -b .str
 
 %build
 %configure2_5x \

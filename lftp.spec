@@ -8,7 +8,7 @@
 
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	4.3.8
+Version:	4.4.0
 Release:	1
 URL:		http://lftp.yar.ru/			
 Group:		Networking/File transfer

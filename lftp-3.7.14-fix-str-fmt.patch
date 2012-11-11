@@ -1,0 +1,44 @@
+--- src/Fish.cc.str	2008-11-25 12:32:14.000000000 +0100
++++ src/Fish.cc	2009-06-07 07:46:55.000000000 +0200
+@@ -553,7 +553,7 @@
+ 	 const char *eol=strchr(err,'\n');
+ 	 if(eol) {
+ 	    xstring &e=xstring::get_tmp(err,eol-err);
+-	    LogError(0,e);
++	    LogError(0,"%s",(const char *)e);
+ 	    SetError(NO_FILE,e);
+ 	    if(pty_recv_buf)
+ 	       pty_recv_buf->Skip(eol-err+1);
+--- src/Job.h.str	2008-11-27 06:56:20.000000000 +0100
++++ src/Job.h	2009-06-07 07:46:55.000000000 +0200
+@@ -76,7 +76,7 @@
+    void ClearStatus()
+       {
+ 	 const char *empty="";
+-	 eprintf(empty);
++	 eprintf("%s",empty);
+       }
+    virtual void	  SayFinal() {}; // final phrase of fg job
+    virtual int	  Done()=0;
+--- src/SleepJob.cc.str	2009-05-14 10:36:39.000000000 +0200
++++ src/SleepJob.cc	2009-06-07 07:47:40.000000000 +0200
+@@ -121,7 +121,7 @@
+       Job::ShowRunStatus(s);
+    else
+    {
+-      s->Show(Status());
++      s->Show("%s",Status());
+       current->TimeoutS(1);
+    }
+ }
+--- src/mgetJob.cc.str	2009-04-27 09:54:59.000000000 +0200
++++ src/mgetJob.cc	2009-06-07 07:46:55.000000000 +0200
+@@ -37,7 +37,7 @@
+ {
+    if(rg)
+    {
+-      s->Show(rg->Status());
++      s->Show("%s",rg->Status());
+       return;
+    }
+    GetJob::ShowRunStatus(s);

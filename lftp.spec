@@ -27,6 +27,7 @@ BuildRequires:	pkgconfig(expat)
 %if %{with dante}
 BuildRequires:	dante-devel
 %endif
+Conflicts:	%{libname} < 4.4.0-2
 
 %description
 LFTP is a shell-like command line ftp client. The main two advantages
@@ -90,11 +91,11 @@ Libraries and includes files for developing programs based on %{name}.
 %{_bindir}/*
 %{_mandir}/man?/*
 %{_datadir}/%{name}/
+%dir %{_libdir}/lftp/%{version}
+%{_libdir}/lftp/%{version}/*.so
 
 %files -n %{libname}
 %{_libdir}/*.so.%{major}*
-%dir %{_libdir}/lftp/%{version}
-%{_libdir}/lftp/%{version}/*.so
 
 %files -n %{devname}
 %{_libdir}/*.so

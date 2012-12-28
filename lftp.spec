@@ -55,7 +55,6 @@ Dynamic libraries from %{name}.
 Summary:	Header files and static libraries from %{name}
 Group:		Development/C
 Requires:	%{libname} >= %{version}-%{release}
-Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release} 
 Obsoletes:	%mklibname -d lftp 0
 

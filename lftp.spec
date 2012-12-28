@@ -20,10 +20,10 @@ Patch2:		lftp-4.2.0-link.patch
 Patch3:		lftp-3.7.14-fix-str-fmt.patch
 Patch4:		lftp-4.4.0-gets.patch
 Requires:	less
-BuildRequires:	ncurses-devel
-BuildRequires:	gnutls-devel >= 3.0
+BuildRequires:	pkgconfig(ncursesw)
+BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	readline-devel
-BuildRequires:	expat-devel
+BuildRequires:	pkgconfig(expat)
 %if %{with dante}
 BuildRequires:	dante-devel
 %endif

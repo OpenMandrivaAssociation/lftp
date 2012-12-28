@@ -1,16 +1,15 @@
 %define	major	0
 %define	libname	%mklibname %{name} %{major}
-%define develname %mklibname %{name} -d
+%define	devname	%mklibname %{name} -d
 
 # build options
-%define	enable_dante	0
-%{?_with_dante: %define enable_dante 1}
+%bcond_with	dante
 
 Summary:	Commandline ftp client
 Name:		lftp
 Version:	4.4.0
-Release:	1
-URL:		http://lftp.yar.ru/			
+Release:	2
+URL:		http://lftp.yar.ru/
 Group:		Networking/File transfer
 License:	GPLv2+
 Source0:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2
@@ -25,7 +24,7 @@ BuildRequires:	ncurses-devel
 BuildRequires:	gnutls-devel >= 3.0
 BuildRequires:	readline-devel
 BuildRequires:	expat-devel
-%if %enable_dante
+%if %{with dante}
 BuildRequires:	dante-devel
 %endif
 
@@ -39,19 +38,19 @@ When you have started background jobs and feel you are done, you can
 just exit lftp and it automatically moves to nohup mode and completes
 the transfers. It has also such nice features as reput and mirror.
 
-%if %enable_dante
+%if !%{with dante}
 Build option:
 --with dante	Enable dante support
 %endif
 
-%package -n %{libname}
+%package -n	%{libname}
 Summary:	Dynamic libraries from %{name}
 Group:		System/Libraries
 
 %description -n	%{libname}
 Dynamic libraries from %{name}.
 
-%package -n %{develname}
+%package -n	%{devname}
 Summary:	Header files and static libraries from %{name}
 Group:		Development/C
 Requires:	%{libname} >= %{version}-%{release}
@@ -59,21 +58,21 @@ Provides:	lib%{name}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release} 
 Obsoletes:	%mklibname -d lftp 0
 
-%description -n	%{develname}
+%description -n	%{devname}
 Libraries and includes files for developing programs based on %{name}.
 
 %prep
 %setup -q
-%patch0 -p1 -b .manpage
-%patch1 -p1 -b .agent
-%patch2 -p1 -b .link
-%patch4 -p1 -b .gets
+%patch0 -p1 -b .manpage~
+%patch1 -p1 -b .agent~
+%patch2 -p1 -b .link̃~
+%patch4 -p1 -b .gets~
 
 %build
 %configure2_5x \
 	--with-modules=yes \
 	--with-pager="exec less" \
-%if %enable_dante
+%if %{with dante}
 	--with-socksdante=yes \
 %endif
 
@@ -97,5 +96,5 @@ Libraries and includes files for developing programs based on %{name}.
 %dir %{_libdir}/lftp/%{version}
 %{_libdir}/lftp/%{version}/*.so
 
-%files -n %{develname}
+%files -n %{devname}
 %{_libdir}/*.so

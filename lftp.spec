@@ -2,13 +2,15 @@
 %define	libname	%mklibname %{name} %{major}
 %define	devname	%mklibname %{name} -d
 
+%define _disable_ld_no_undefined 1
+
 # build options
 %bcond_with	dante
 
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	4.4.0
-Release:	2
+Version:	4.4.3
+Release:	1
 URL:		http://lftp.yar.ru/
 Group:		Networking/File transfer
 License:	GPLv2+
@@ -65,7 +67,7 @@ Libraries and includes files for developing programs based on %{name}.
 %setup -q
 %patch0 -p1 -b .manpage~
 %patch1 -p1 -b .agent~
-%patch2 -p1 -b .link̃~
+%patch2 -p1 -b .link~
 %patch4 -p1 -b .gets~
 
 %build

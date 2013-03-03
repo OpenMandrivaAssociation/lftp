@@ -9,13 +9,13 @@
 
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	4.4.3
+Version:	4.4.4
 Release:	1
 URL:		http://lftp.yar.ru/
 Group:		Networking/File transfer
 License:	GPLv2+
-Source0:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2
-Source1:	http://ftp.yars.free.net/pub/source/%{name}/%{name}-%{version}.tar.bz2.asc
+Source0:	ftp://ftp.st.ryukoku.ac.jp/pub/network/ftp/%{name}/%{name}-%{version}.tar.bz2
+Source1:	ftp://ftp.st.ryukoku.ac.jp/pub/network/ftp//%{name}/%{name}-%{version}.tar.bz2.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
 Patch2:		lftp-4.2.0-link.patch

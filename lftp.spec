@@ -1,35 +1,36 @@
-%define	major	0
-%define	libname	%mklibname %{name} %{major}
-%define	devname	%mklibname %{name} -d
-
 %define _disable_ld_no_undefined 1
-
 # build options
 %bcond_with	dante
 
+%define	major	0
+%define	libjobs	%mklibname %{name}-jobs %{major}
+%define	libtasks %mklibname %{name}-tasks %{major}
+%define	devname	%mklibname %{name} -d
+
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	4.4.4
+Version:	4.4.7
 Release:	1
-URL:		http://lftp.yar.ru/
 Group:		Networking/File transfer
 License:	GPLv2+
-Source0:	ftp://ftp.st.ryukoku.ac.jp/pub/network/ftp/%{name}/%{name}-%{version}.tar.bz2
-Source1:	ftp://ftp.st.ryukoku.ac.jp/pub/network/ftp//%{name}/%{name}-%{version}.tar.bz2.asc
+Url:		http://lftp.yar.ru/
+Source0:	ftp://ftp.st.ryukoku.ac.jp/pub/network/ftp/%{name}/%{name}-%{version}.tar.xz
+Source1:	ftp://ftp.st.ryukoku.ac.jp/pub/network/ftp/%{name}/%{name}-%{version}.tar.xz.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
 Patch2:		lftp-4.2.0-link.patch
-Patch3:		lftp-3.7.14-fix-str-fmt.patch
+#Patch3:		lftp-3.7.14-fix-str-fmt.patch
 Patch4:		lftp-4.4.0-gets.patch
-Requires:	less
-BuildRequires:	pkgconfig(ncursesw)
-BuildRequires:	pkgconfig(gnutls)
+
 BuildRequires:	readline-devel
 BuildRequires:	pkgconfig(expat)
+BuildRequires:	pkgconfig(gnutls)
+BuildRequires:	pkgconfig(ncursesw)
 %if %{with dante}
 BuildRequires:	dante-devel
 %endif
-Conflicts:	%{libname} < 4.4.0-2
+Requires:	less
+Conflicts:	%{_lib}lftp0 < 4.4.0-2
 
 %description
 LFTP is a shell-like command line ftp client. The main two advantages
@@ -46,31 +47,35 @@ Build option:
 --with dante	Enable dante support
 %endif
 
-%package -n	%{libname}
+%package -n	%{libjobs}
 Summary:	Dynamic libraries from %{name}
 Group:		System/Libraries
+Obsoletes:	%{_lib}lftp0 < 4.4.7-1
 
-%description -n	%{libname}
+%description -n	%{libjobs}
+Dynamic libraries from %{name}.
+
+%package -n	%{libtasks}
+Summary:	Dynamic libraries from %{name}
+Group:		System/Libraries
+Conflicts:	%{_lib}lftp0 < 4.4.7-1
+
+%description -n	%{libtasks}
 Dynamic libraries from %{name}.
 
 %package -n	%{devname}
 Summary:	Header files and static libraries from %{name}
 Group:		Development/C
-Requires:	%{libname} >= %{version}-%{release}
+Requires:	%{libjobs} >= %{version}-%{release}
+Requires:	%{libtasks} >= %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release} 
-Obsoletes:	%mklibname -d lftp 0
 
 %description -n	%{devname}
 Libraries and includes files for developing programs based on %{name}.
 
 %prep
 %setup -q
-%patch0 -p1 -b .manpage~
-%patch1 -p1 -b .agent~
-%patch2 -p1 -b .link~
-%patch4 -p1 -b .gets~
-
-%build
+%apply_patches
 %configure2_5x \
 	--with-modules=yes \
 	--with-pager="exec less" \
@@ -95,8 +100,12 @@ Libraries and includes files for developing programs based on %{name}.
 %dir %{_libdir}/lftp/%{version}
 %{_libdir}/lftp/%{version}/*.so
 
-%files -n %{libname}
-%{_libdir}/*.so.%{major}*
+%files -n %{libjobs}
+%{_libdir}/liblftp-jobs.so.%{major}*
+
+%files -n %{libtasks}
+%{_libdir}/liblftp-tasks.so.%{major}*
 
 %files -n %{devname}
 %{_libdir}/*.so
+

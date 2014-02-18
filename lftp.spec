@@ -14,8 +14,8 @@ Release:	2
 Group:		Networking/File transfer
 License:	GPLv2+
 Url:		http://lftp.yar.ru/
-Source0:	ftp://ftp.st.ryukoku.ac.jp/pub/network/ftp/%{name}/%{name}-%{version}.tar.xz
-Source1:	ftp://ftp.st.ryukoku.ac.jp/pub/network/ftp/%{name}/%{name}-%{version}.tar.xz.asc
+Source0:    http://lftp.yar.ru/ftp/%{name}-%{version}.tar.xz
+Source1:    http://lftp.yar.ru/ftp/%{name}-%{version}.tar.xz.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
 #Patch2:		lftp-4.2.0-link.patch

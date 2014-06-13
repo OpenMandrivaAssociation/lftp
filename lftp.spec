@@ -10,7 +10,7 @@
 Summary:	Commandline ftp client
 Name:		lftp
 Version:	4.4.15
-Release:	1
+Release:	2
 Group:		Networking/File transfer
 License:	GPLv2+
 Url:		http://lftp.yar.ru/

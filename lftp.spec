@@ -9,7 +9,7 @@
 
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	4.5.6
+Version:	4.6.0
 Release:	1
 Group:		Networking/File transfer
 License:	GPLv2+

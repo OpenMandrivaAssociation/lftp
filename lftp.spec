@@ -10,7 +10,7 @@
 Summary:	Commandline ftp client
 Name:		lftp
 Version:	4.5.3
-Release:	2
+Release:	3
 Group:		Networking/File transfer
 License:	GPLv2+
 Url:		http://lftp.yar.ru/
@@ -18,8 +18,6 @@ Source0:	http://lftp.yar.ru/ftp/%{name}-%{version}.tar.xz
 Source1:	http://lftp.yar.ru/ftp/%{name}-%{version}.tar.xz.asc
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
-#Patch2:		lftp-4.2.0-link.patch
-#Patch3:		lftp-3.7.14-fix-str-fmt.patch
 Patch4:		lftp-4.4.0-gets.patch
 
 BuildRequires:	readline-devel
@@ -31,6 +29,8 @@ BuildRequires:	dante-devel
 %endif
 Requires:	less
 Conflicts:	%{_lib}lftp0 < 4.4.0-2
+
+Provides:	ftp
 
 %description
 LFTP is a shell-like command line ftp client. The main two advantages

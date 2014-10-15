@@ -1,5 +1,7 @@
 removed_sources:
   lftp-4.5.2.tar.xz: c87b893852900d8e16556fac7305bdb25febfb7c
-sources:
   lftp-4.5.3.tar.xz: 572d0a459c7a2399ae51e687de6f9c68098267aa
   lftp-4.5.3.tar.xz.asc: 02a35ebfbbe87a823109102aebaf58bfaf3c6c19
+sources:
+  lftp-4.5.6.tar.xz: 3492b0b60c420d50216fdc9486944e8ef01eb70a
+  lftp-4.5.6.tar.xz.asc: 0b0da016137c477e617eb3ff2b60f8a5e445e4dd

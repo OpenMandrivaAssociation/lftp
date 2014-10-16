@@ -10,7 +10,7 @@
 Summary:	Commandline ftp client
 Name:		lftp
 Version:	4.6.0
-Release:	1
+Release:	2
 Group:		Networking/File transfer
 License:	GPLv2+
 Url:		http://lftp.yar.ru/
@@ -28,7 +28,7 @@ BuildRequires:	pkgconfig(ncursesw)
 BuildRequires:	dante-devel
 %endif
 Requires:	less
-Conflicts:	%{_lib}lftp0 < 4.4.0-2
+Conflicts:	%{_lib}lftp0 < 4.6.0-1
 
 Provides:	ftp
 
@@ -50,7 +50,7 @@ Build option:
 %package -n	%{libjobs}
 Summary:	Dynamic libraries from %{name}
 Group:		System/Libraries
-Obsoletes:	%{_lib}lftp0 < 4.4.7-1
+Obsoletes:	%{_lib}lftp0 < 4.6.0-1
 
 %description -n	%{libjobs}
 Dynamic libraries from %{name}.
@@ -58,7 +58,7 @@ Dynamic libraries from %{name}.
 %package -n	%{libtasks}
 Summary:	Dynamic libraries from %{name}
 Group:		System/Libraries
-Conflicts:	%{_lib}lftp0 < 4.4.7-1
+Conflicts:	%{_lib}lftp0 < 4.6.0-1
 
 %description -n	%{libtasks}
 Dynamic libraries from %{name}.

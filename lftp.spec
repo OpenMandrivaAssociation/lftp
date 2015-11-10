@@ -10,7 +10,7 @@
 Summary:	Commandline ftp client
 Name:		lftp
 Version:	4.6.4
-Release:	1
+Release:	2
 Group:		Networking/File transfer
 License:	GPLv2+
 Url:		http://lftp.yar.ru/
@@ -46,6 +46,16 @@ the transfers. It has also such nice features as reput and mirror.
 Build option:
 --with dante	Enable dante support
 %endif
+
+%package scripts
+Summary:	Scripts for lftp
+Group:		Networking/File transfer
+BuildArch:	noarch
+Requires:	lftp = %{EVRD}
+Conflicts:	lftp < 4.6.0-2
+
+%description scripts
+Utility scripts for use with lftp.
 
 %package -n	%{libjobs}
 Summary:	Dynamic libraries from %{name}
@@ -96,9 +106,11 @@ Libraries and includes files for developing programs based on %{name}.
 %config(noreplace) %{_sysconfdir}/lftp.conf
 %{_bindir}/*
 %{_mandir}/man?/*
-%{_datadir}/%{name}/
 %dir %{_libdir}/lftp/%{version}
 %{_libdir}/lftp/%{version}/*.so
+
+%files scripts
+%{_datadir}/%{name}/
 
 %files -n %{libjobs}
 %{_libdir}/liblftp-jobs.so.%{major}*

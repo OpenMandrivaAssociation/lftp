@@ -9,7 +9,7 @@
 
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	4.6.5
+Version:	4.7.2
 Release:	1
 Group:		Networking/File transfer
 License:	GPLv2+
@@ -102,7 +102,7 @@ Libraries and includes files for developing programs based on %{name}.
 
 %files -f %{name}.lang
 %doc COPYING FAQ MIRRORS NEWS 
-%doc README.* THANKS TODO lftp.lsm BUGS
+%doc README.* THANKS TODO BUGS
 %config(noreplace) %{_sysconfdir}/lftp.conf
 %{_bindir}/*
 %{_mandir}/man?/*

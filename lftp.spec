@@ -9,7 +9,7 @@
 
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	4.7.2
+Version:	4.8.3
 Release:	1
 Group:		Networking/File transfer
 License:	GPLv2+
@@ -78,7 +78,7 @@ Summary:	Header files and static libraries from %{name}
 Group:		Development/C
 Requires:	%{libjobs} >= %{version}-%{release}
 Requires:	%{libtasks} >= %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release} 
+Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n	%{devname}
 Libraries and includes files for developing programs based on %{name}.
@@ -93,7 +93,7 @@ Libraries and includes files for developing programs based on %{name}.
 	--with-socksdante=yes \
 %endif
 
-%make 
+%make
 
 %install
 %makeinstall_std
@@ -101,7 +101,7 @@ Libraries and includes files for developing programs based on %{name}.
 %find_lang %{name}
 
 %files -f %{name}.lang
-%doc COPYING FAQ MIRRORS NEWS 
+%doc COPYING FAQ MIRRORS NEWS
 %doc README.* THANKS TODO BUGS
 %config(noreplace) %{_sysconfdir}/lftp.conf
 %{_bindir}/*

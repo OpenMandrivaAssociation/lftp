@@ -20,6 +20,7 @@ Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
 Patch4:		lftp-4.4.0-gets.patch
 
+BuildRequires:	pkgconfig(zlib)
 BuildRequires:	readline-devel
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(gnutls)

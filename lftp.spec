@@ -1,3 +1,5 @@
+%global optflags %{optflags} --rtlib=compiler-rt
+
 %define _disable_ld_no_undefined 1
 # build options
 %bcond_with	dante
@@ -17,6 +19,7 @@ Url:		http://lftp.yar.ru/
 Source0:	http://lftp.yar.ru/ftp/%{name}-%{version}.tar.xz
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
+Patch2:		lftp-4.8.4-clang.patch
 Patch4:		lftp-4.4.0-gets.patch
 
 BuildRequires:	pkgconfig(zlib)
@@ -108,6 +111,8 @@ Libraries and includes files for developing programs based on %{name}.
 %{_mandir}/man?/*
 %dir %{_libdir}/lftp/%{version}
 %{_libdir}/lftp/%{version}/*.so
+%{_datadir}/applications/lftp.desktop
+%{_datadir}/icons/*/*/*/lftp-icon.*
 
 %files scripts
 %{_datadir}/%{name}/

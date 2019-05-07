@@ -12,7 +12,7 @@
 Summary:	Commandline ftp client
 Name:		lftp
 Version:	4.8.4
-Release:	2
+Release:	3
 Group:		Networking/File transfer
 License:	GPLv2+
 Url:		http://lftp.yar.ru/
@@ -20,6 +20,7 @@ Source0:	http://lftp.yar.ru/ftp/%{name}-%{version}.tar.xz
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
 Patch2:		lftp-4.8.4-clang.patch
+Patch3:		lftp-4.8.4-More-menu.patch
 Patch4:		lftp-4.4.0-gets.patch
 
 BuildRequires:	pkgconfig(zlib)
@@ -87,8 +88,7 @@ Provides:	%{name}-devel = %{version}-%{release}
 Libraries and includes files for developing programs based on %{name}.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 %configure \
 	--with-modules=yes \
 	--with-pager="exec less" \

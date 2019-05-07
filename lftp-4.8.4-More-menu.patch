@@ -1,0 +1,9 @@
+diff -up lftp-4.8.4/contrib/lftp.desktop.omv~ lftp-4.8.4/contrib/lftp.desktop
+--- lftp-4.8.4/contrib/lftp.desktop.omv~	2019-05-07 23:42:53.613079592 +0200
++++ lftp-4.8.4/contrib/lftp.desktop	2019-05-07 23:42:59.332056957 +0200
+@@ -5,4 +5,4 @@ Icon=lftp-icon
+ Type=Application
+ Terminal=true
+ Exec=lftp
+-Categories=Network;
++Categories=Network;X-MandrivaLinux-More;

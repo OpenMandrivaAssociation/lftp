@@ -6,4 +6,4 @@ diff -up lftp-4.8.4/contrib/lftp.desktop.omv~ lftp-4.8.4/contrib/lftp.desktop
  Terminal=true
  Exec=lftp
 -Categories=Network;
-+Categories=Network;X-MandrivaLinux-More;
++Categories=Network;X-KDE-More;

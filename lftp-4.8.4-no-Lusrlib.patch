@@ -1,0 +1,95 @@
+diff -up lftp-4.8.4/m4/lftp.m4.omv~ lftp-4.8.4/m4/lftp.m4
+--- lftp-4.8.4/m4/lftp.m4.omv~	2020-04-09 19:24:26.894757343 +0200
++++ lftp-4.8.4/m4/lftp.m4	2020-04-09 19:25:18.034385049 +0200
+@@ -318,7 +318,7 @@ AC_DEFUN([LFTP_LIBIDN2_CHECK],[
+      AC_ARG_WITH(libidn2, AS_HELP_STRING([--with-libidn2@<:@=DIR@:>@],[Support IDN2 (needs GNU Libidn2)]),
+        libidn2=$withval, libidn2=yes)
+      if test "$libidn2" != "no"; then
+-       if test "$libidn2" != "yes"; then
++       if test "$libidn2" != "yes" -a "$libidn2" != "/usr"; then
+          LDFLAGS="${LDFLAGS} -L$libidn2/lib"
+          CPPFLAGS="${CPPFLAGS} -I$libidn2/include"
+        fi
+diff -up lftp-4.8.4/m4/lftp_lib_readline.m4.omv~ lftp-4.8.4/m4/lftp_lib_readline.m4
+--- lftp-4.8.4/m4/lftp_lib_readline.m4.omv~	2020-04-09 19:27:53.338405962 +0200
++++ lftp-4.8.4/m4/lftp_lib_readline.m4	2020-04-09 19:28:16.741718052 +0200
+@@ -107,7 +107,7 @@ AC_DEFUN([lftp_LIB_READLINE],
+ 	if test -f "$readline_include_dir/readline/readline.h"; then
+ 	    readline_include_dir="$readline_include_dir/readline"
+ 	fi
+-        readline_ld_flags="-L$readline_prefix/lib"
++        if [ "$readline_prefix" != "/usr" ]; then readline_ld_flags="-L$readline_prefix/lib"; fi
+         readline_lib_flags="-lreadline"
+         run_readline_test="yes"
+     elif test "$readline_requested" = "yes"; then
+diff -up lftp-4.8.4/configure.ac.omv~ lftp-4.8.4/configure.ac
+--- lftp-4.8.4/configure.ac.omv~	2020-04-09 19:31:31.800286079 +0200
++++ lftp-4.8.4/configure.ac	2020-04-09 19:32:17.897885687 +0200
+@@ -185,7 +185,7 @@ yes|no|"") ;;
+ 	 with_socksdante=yes;;
+ esac
+ 
+-if test x$socks_loc != x; then
++if test x$socks_loc != x -a x$socks_loc != /usr; then
+    LDFLAGS="$LDFLAGS -L$socks_loc/lib"
+    CPPFLAGS="$CPPFLAGS -I$socks_loc/include"
+ fi
+@@ -306,9 +306,11 @@ fi
+ 
+ AX_CHECK_ZLIB([
+    AC_SUBST([ZLIB],[-lz])
++   if [ "${ZLIB_HOME}" != "/usr" ]; then
+    r=""; test "$enable_rpath" = yes -a "$ZLIB_HOME" != /usr && r=" -R${ZLIB_HOME}/lib"
+    AC_SUBST([ZLIB_LDFLAGS],["-L${ZLIB_HOME}/lib$r"])
+    AC_SUBST([ZLIB_CPPFLAGS],["-I${ZLIB_HOME}/include"])
++   fi
+ ],[
+    AC_MSG_ERROR([cannot find -lz library, install zlib-devel package])
+ ])
+diff -up lftp-4.8.4/m4/ax_check_zlib.m4.omv~ lftp-4.8.4/m4/ax_check_zlib.m4
+--- lftp-4.8.4/m4/ax_check_zlib.m4.omv~	2020-04-09 19:33:11.759583385 +0200
++++ lftp-4.8.4/m4/ax_check_zlib.m4	2020-04-09 19:33:26.116768871 +0200
+@@ -104,7 +104,7 @@ then
+ 
+   ZLIB_OLD_LDFLAGS="$LDFLAGS"
+   ZLIB_OLD_CPPFLAGS="$CPPFLAGS"
+-  if test -n "${ZLIB_HOME}"; then
++  if test -n "${ZLIB_HOME}" -a "${ZLIB_HOME}" != "/usr"; then
+         LDFLAGS="$LDFLAGS -L${ZLIB_HOME}/lib"
+         CPPFLAGS="$CPPFLAGS -I${ZLIB_HOME}/include"
+   fi
+diff -up lftp-4.8.4/m4/ax_lib_expat.m4.omv~ lftp-4.8.4/m4/ax_lib_expat.m4
+--- lftp-4.8.4/m4/ax_lib_expat.m4.omv~	2020-04-09 19:33:30.338823380 +0200
++++ lftp-4.8.4/m4/ax_lib_expat.m4	2020-04-09 19:33:51.991102650 +0200
+@@ -108,8 +108,10 @@ AC_DEFUN([AX_LIB_EXPAT],
+     run_expat_test="no"
+ 
+     if test -n "$expat_prefix"; then
++        if "$expat_prefix" != "/usr"; then
+         expat_include_dir="$expat_prefix/include"
+         expat_ld_flags="-L$expat_prefix/lib"
++        fi
+         expat_lib_flags="-lexpat"
+         run_expat_test="yes"
+     elif test "$expat_requested" = "yes"; then
+diff -up lftp-4.8.4/m4/ssl.m4.omv~ lftp-4.8.4/m4/ssl.m4
+--- lftp-4.8.4/m4/ssl.m4.omv~	2020-04-09 19:32:29.147031651 +0200
++++ lftp-4.8.4/m4/ssl.m4	2020-04-09 19:32:51.515321499 +0200
+@@ -9,7 +9,7 @@ AC_CACHE_VAL(lftp_cv_openssl,
+ 		old_LDFLAGS="$LDFLAGS"
+ 		old_CPPFLAGS="$CPPFLAGS"
+ 		LIBS="$LIBS -lssl -lcrypto"
+-		if test $loc != default; then
++		if test $loc != default -a "$loc" != "/usr"; then
+ 			LDFLAGS="$LDFLAGS -L$loc/lib"
+ 			CPPFLAGS="$CPPFLAGS -I$loc/include"
+ 		fi
+@@ -20,7 +20,7 @@ AC_CACHE_VAL(lftp_cv_openssl,
+ 		CPPFLAGS="$old_CPPFLAGS"
+ 		if test $found_loc != "none"; then
+ 			lftp_cv_openssl="OPENSSL_LIBS=\"-lssl -lcrypto\""
+-			if test $found_loc != default; then
++			if test $found_loc != default -a $found_loc != /usr; then
+ 				r=""; test "$enable_rpath" = yes -a "$found_loc" != /usr && r=" -R$found_loc/lib"
+ 				lftp_cv_openssl="$lftp_cv_openssl OPENSSL_LDFLAGS=\"-L$found_loc/lib$r\""
+ 				lftp_cv_openssl="$lftp_cv_openssl OPENSSL_CPPFLAGS=-I$found_loc/include"

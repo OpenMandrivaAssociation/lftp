@@ -1,31 +1,7 @@
-diff -up lftp-4.8.4/m4/lftp.m4.omv~ lftp-4.8.4/m4/lftp.m4
---- lftp-4.8.4/m4/lftp.m4.omv~	2020-04-09 19:24:26.894757343 +0200
-+++ lftp-4.8.4/m4/lftp.m4	2020-04-09 19:25:18.034385049 +0200
-@@ -318,7 +318,7 @@ AC_DEFUN([LFTP_LIBIDN2_CHECK],[
-      AC_ARG_WITH(libidn2, AS_HELP_STRING([--with-libidn2@<:@=DIR@:>@],[Support IDN2 (needs GNU Libidn2)]),
-        libidn2=$withval, libidn2=yes)
-      if test "$libidn2" != "no"; then
--       if test "$libidn2" != "yes"; then
-+       if test "$libidn2" != "yes" -a "$libidn2" != "/usr"; then
-          LDFLAGS="${LDFLAGS} -L$libidn2/lib"
-          CPPFLAGS="${CPPFLAGS} -I$libidn2/include"
-        fi
-diff -up lftp-4.8.4/m4/lftp_lib_readline.m4.omv~ lftp-4.8.4/m4/lftp_lib_readline.m4
---- lftp-4.8.4/m4/lftp_lib_readline.m4.omv~	2020-04-09 19:27:53.338405962 +0200
-+++ lftp-4.8.4/m4/lftp_lib_readline.m4	2020-04-09 19:28:16.741718052 +0200
-@@ -107,7 +107,7 @@ AC_DEFUN([lftp_LIB_READLINE],
- 	if test -f "$readline_include_dir/readline/readline.h"; then
- 	    readline_include_dir="$readline_include_dir/readline"
- 	fi
--        readline_ld_flags="-L$readline_prefix/lib"
-+        if [ "$readline_prefix" != "/usr" ]; then readline_ld_flags="-L$readline_prefix/lib"; fi
-         readline_lib_flags="-lreadline"
-         run_readline_test="yes"
-     elif test "$readline_requested" = "yes"; then
-diff -up lftp-4.8.4/configure.ac.omv~ lftp-4.8.4/configure.ac
---- lftp-4.8.4/configure.ac.omv~	2020-04-09 19:31:31.800286079 +0200
-+++ lftp-4.8.4/configure.ac	2020-04-09 19:32:17.897885687 +0200
-@@ -185,7 +185,7 @@ yes|no|"") ;;
+diff -uraN lftp-4.9.2/configure.ac omv-lftp-4.9.2/configure.ac
+--- lftp-4.9.2/configure.ac	2018-12-26 18:14:57.000000000 +0100
++++ omv-lftp-4.9.2/configure.ac	2020-08-14 17:07:09.799388741 +0200
+@@ -185,7 +185,7 @@
  	 with_socksdante=yes;;
  esac
  
@@ -34,7 +10,7 @@ diff -up lftp-4.8.4/configure.ac.omv~ lftp-4.8.4/configure.ac
     LDFLAGS="$LDFLAGS -L$socks_loc/lib"
     CPPFLAGS="$CPPFLAGS -I$socks_loc/include"
  fi
-@@ -306,9 +306,11 @@ fi
+@@ -306,9 +306,11 @@
  
  AX_CHECK_ZLIB([
     AC_SUBST([ZLIB],[-lz])
@@ -46,10 +22,10 @@ diff -up lftp-4.8.4/configure.ac.omv~ lftp-4.8.4/configure.ac
  ],[
     AC_MSG_ERROR([cannot find -lz library, install zlib-devel package])
  ])
-diff -up lftp-4.8.4/m4/ax_check_zlib.m4.omv~ lftp-4.8.4/m4/ax_check_zlib.m4
---- lftp-4.8.4/m4/ax_check_zlib.m4.omv~	2020-04-09 19:33:11.759583385 +0200
-+++ lftp-4.8.4/m4/ax_check_zlib.m4	2020-04-09 19:33:26.116768871 +0200
-@@ -104,7 +104,7 @@ then
+diff -uraN lftp-4.9.2/m4/ax_check_zlib.m4 omv-lftp-4.9.2/m4/ax_check_zlib.m4
+--- lftp-4.9.2/m4/ax_check_zlib.m4	2017-08-04 16:01:33.000000000 +0200
++++ omv-lftp-4.9.2/m4/ax_check_zlib.m4	2020-08-14 17:07:55.160100147 +0200
+@@ -104,7 +104,7 @@
  
    ZLIB_OLD_LDFLAGS="$LDFLAGS"
    ZLIB_OLD_CPPFLAGS="$CPPFLAGS"
@@ -58,10 +34,10 @@ diff -up lftp-4.8.4/m4/ax_check_zlib.m4.omv~ lftp-4.8.4/m4/ax_check_zlib.m4
          LDFLAGS="$LDFLAGS -L${ZLIB_HOME}/lib"
          CPPFLAGS="$CPPFLAGS -I${ZLIB_HOME}/include"
    fi
-diff -up lftp-4.8.4/m4/ax_lib_expat.m4.omv~ lftp-4.8.4/m4/ax_lib_expat.m4
---- lftp-4.8.4/m4/ax_lib_expat.m4.omv~	2020-04-09 19:33:30.338823380 +0200
-+++ lftp-4.8.4/m4/ax_lib_expat.m4	2020-04-09 19:33:51.991102650 +0200
-@@ -108,8 +108,10 @@ AC_DEFUN([AX_LIB_EXPAT],
+diff -uraN lftp-4.9.2/m4/ax_lib_expat.m4 omv-lftp-4.9.2/m4/ax_lib_expat.m4
+--- lftp-4.9.2/m4/ax_lib_expat.m4	2017-08-04 16:01:58.000000000 +0200
++++ omv-lftp-4.9.2/m4/ax_lib_expat.m4	2020-08-14 17:08:38.394966649 +0200
+@@ -108,8 +108,10 @@
      run_expat_test="no"
  
      if test -n "$expat_prefix"; then
@@ -72,10 +48,34 @@ diff -up lftp-4.8.4/m4/ax_lib_expat.m4.omv~ lftp-4.8.4/m4/ax_lib_expat.m4
          expat_lib_flags="-lexpat"
          run_expat_test="yes"
      elif test "$expat_requested" = "yes"; then
-diff -up lftp-4.8.4/m4/ssl.m4.omv~ lftp-4.8.4/m4/ssl.m4
---- lftp-4.8.4/m4/ssl.m4.omv~	2020-04-09 19:32:29.147031651 +0200
-+++ lftp-4.8.4/m4/ssl.m4	2020-04-09 19:32:51.515321499 +0200
-@@ -9,7 +9,7 @@ AC_CACHE_VAL(lftp_cv_openssl,
+diff -uraN lftp-4.9.2/m4/lftp_lib_readline.m4 omv-lftp-4.9.2/m4/lftp_lib_readline.m4
+--- lftp-4.9.2/m4/lftp_lib_readline.m4	2020-01-11 17:02:43.000000000 +0100
++++ omv-lftp-4.9.2/m4/lftp_lib_readline.m4	2020-08-14 17:05:46.201452568 +0200
+@@ -107,7 +107,7 @@
+ 	if test -f "$readline_include_dir/readline/readline.h"; then
+ 	    readline_include_dir="$readline_include_dir/readline"
+ 	fi
+-        readline_ld_flags="-L$readline_prefix/lib"
++        if [ "$readline_prefix" != "/usr" ]; then readline_ld_flags="-L$readline_prefix/lib"; fi
+         if test -z "$readline_lib_flags"; then
+             readline_lib_flags="-lreadline"
+         fi
+diff -uraN lftp-4.9.2/m4/lftp.m4 omv-lftp-4.9.2/m4/lftp.m4
+--- lftp-4.9.2/m4/lftp.m4	2017-08-10 08:12:03.000000000 +0200
++++ omv-lftp-4.9.2/m4/lftp.m4	2020-08-14 17:04:51.966388932 +0200
+@@ -318,7 +318,7 @@
+      AC_ARG_WITH(libidn2, AS_HELP_STRING([--with-libidn2@<:@=DIR@:>@],[Support IDN2 (needs GNU Libidn2)]),
+        libidn2=$withval, libidn2=yes)
+      if test "$libidn2" != "no"; then
+-       if test "$libidn2" != "yes"; then
++       if test "$libidn2" != "yes" -a "$libidn2" != "/usr"; then
+          LDFLAGS="${LDFLAGS} -L$libidn2/lib"
+          CPPFLAGS="${CPPFLAGS} -I$libidn2/include"
+        fi
+diff -uraN lftp-4.9.2/m4/ssl.m4 omv-lftp-4.9.2/m4/ssl.m4
+--- lftp-4.9.2/m4/ssl.m4	2017-08-04 16:00:40.000000000 +0200
++++ omv-lftp-4.9.2/m4/ssl.m4	2020-08-14 17:09:40.224616924 +0200
+@@ -9,7 +9,7 @@
  		old_LDFLAGS="$LDFLAGS"
  		old_CPPFLAGS="$CPPFLAGS"
  		LIBS="$LIBS -lssl -lcrypto"
@@ -84,7 +84,7 @@ diff -up lftp-4.8.4/m4/ssl.m4.omv~ lftp-4.8.4/m4/ssl.m4
  			LDFLAGS="$LDFLAGS -L$loc/lib"
  			CPPFLAGS="$CPPFLAGS -I$loc/include"
  		fi
-@@ -20,7 +20,7 @@ AC_CACHE_VAL(lftp_cv_openssl,
+@@ -20,7 +20,7 @@
  		CPPFLAGS="$old_CPPFLAGS"
  		if test $found_loc != "none"; then
  			lftp_cv_openssl="OPENSSL_LIBS=\"-lssl -lcrypto\""

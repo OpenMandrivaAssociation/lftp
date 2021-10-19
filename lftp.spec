@@ -1,5 +1,3 @@
-%global optflags %{optflags} --rtlib=compiler-rt
-
 %define _disable_ld_no_undefined 1
 # build options
 %bcond_with	dante
@@ -12,7 +10,7 @@
 Summary:	Commandline ftp client
 Name:		lftp
 Version:	4.9.2
-Release:	1
+Release:	2
 Group:		Networking/File transfer
 License:	GPLv2+
 Url:		http://lftp.yar.ru/
@@ -25,7 +23,7 @@ Patch4:		lftp-4.4.0-gets.patch
 Patch5:		lftp-4.8.4-no-Lusrlib.patch
 
 BuildRequires:	pkgconfig(zlib)
-BuildRequires:	readline-devel
+BuildRequires:	pkgconfig(readline)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(gnutls)
 BuildRequires:	pkgconfig(ncursesw)
@@ -97,10 +95,10 @@ Libraries and includes files for developing programs based on %{name}.
 	--with-socksdante=yes \
 %endif
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %find_lang %{name}
 
@@ -109,7 +107,7 @@ Libraries and includes files for developing programs based on %{name}.
 %doc README.* THANKS TODO BUGS
 %config(noreplace) %{_sysconfdir}/lftp.conf
 %{_bindir}/*
-%{_mandir}/man?/*
+%doc %{_mandir}/man?/*
 %dir %{_libdir}/lftp/%{version}
 %{_libdir}/lftp/%{version}/*.so
 %{_datadir}/applications/lftp.desktop

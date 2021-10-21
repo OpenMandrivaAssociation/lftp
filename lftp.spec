@@ -1,16 +1,16 @@
 %define _disable_ld_no_undefined 1
 # build options
-%bcond_with	dante
+%bcond_with dante
 
-%define	major	0
-%define	libjobs	%mklibname %{name}-jobs %{major}
-%define	libtasks %mklibname %{name}-tasks %{major}
-%define	devname	%mklibname %{name} -d
+%define major 0
+%define libjobs %mklibname %{name}-jobs %{major}
+%define libtasks %mklibname %{name}-tasks %{major}
+%define devname %mklibname %{name} -d
 
 Summary:	Commandline ftp client
 Name:		lftp
 Version:	4.9.2
-Release:	2
+Release:	3
 Group:		Networking/File transfer
 License:	GPLv2+
 Url:		http://lftp.yar.ru/
@@ -32,7 +32,6 @@ BuildRequires:	dante-devel
 %endif
 Requires:	less
 Conflicts:	%{_lib}lftp0 < 4.6.0-1
-
 Provides:	ftp
 
 %description
@@ -60,34 +59,36 @@ Conflicts:	lftp < 4.6.0-2
 %description scripts
 Utility scripts for use with lftp.
 
-%package -n	%{libjobs}
+%package -n %{libjobs}
 Summary:	Dynamic libraries from %{name}
 Group:		System/Libraries
 Obsoletes:	%{_lib}lftp0 < 4.6.0-1
 
-%description -n	%{libjobs}
+%description -n %{libjobs}
 Dynamic libraries from %{name}.
 
-%package -n	%{libtasks}
+%package -n %{libtasks}
 Summary:	Dynamic libraries from %{name}
 Group:		System/Libraries
 Conflicts:	%{_lib}lftp0 < 4.6.0-1
 
-%description -n	%{libtasks}
+%description -n %{libtasks}
 Dynamic libraries from %{name}.
 
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Header files and static libraries from %{name}
 Group:		Development/C
 Requires:	%{libjobs} >= %{version}-%{release}
 Requires:	%{libtasks} >= %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n	%{devname}
+%description -n %{devname}
 Libraries and includes files for developing programs based on %{name}.
 
 %prep
 %autosetup -p1
+
+%build
 %configure \
 	--with-modules=yes \
 	--with-pager="exec less" \

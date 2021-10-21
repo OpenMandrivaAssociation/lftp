@@ -1,8 +1,19 @@
-diff -up lftp-4.8.4/lib/xalloc.h.omv~ lftp-4.8.4/lib/xalloc.h
-diff -up lftp-4.8.4/lib/xalloc-oversized.h.omv~ lftp-4.8.4/lib/xalloc-oversized.h
---- lftp-4.8.4/lib/xalloc-oversized.h.omv~	2018-08-22 23:33:50.743554537 +0200
-+++ lftp-4.8.4/lib/xalloc-oversized.h	2018-08-22 23:34:09.882640257 +0200
-@@ -41,7 +41,7 @@ typedef size_t __xalloc_count_type;
+diff -Naur lftp-4.9.2/lib/intprops.h lftp-4.9.2.tpg/lib/intprops.h
+--- lftp-4.9.2/lib/intprops.h	2020-08-13 19:39:42.000000000 +0000
++++ lftp-4.9.2.tpg/lib/intprops.h	2021-10-21 20:01:02.413214940 +0000
+@@ -241,7 +241,7 @@
+ 
+ /* True if __builtin_add_overflow_p (A, B, C) works, and similarly for
+    __builtin_sub_overflow_p and __builtin_mul_overflow_p.  */
+-#define _GL_HAS_BUILTIN_OVERFLOW_P (7 <= __GNUC__)
++#define _GL_HAS_BUILTIN_OVERFLOW_P (!defined(__clang__) && 7 <= __GNUC__)
+ 
+ /* The _GL*_OVERFLOW macros have the same restrictions as the
+    *_RANGE_OVERFLOW macros, except that they do not assume that operands
+diff -Naur lftp-4.9.2/lib/xalloc-oversized.h lftp-4.9.2.tpg/lib/xalloc-oversized.h
+--- lftp-4.9.2/lib/xalloc-oversized.h	2020-01-15 19:15:42.000000000 +0000
++++ lftp-4.9.2.tpg/lib/xalloc-oversized.h	2021-10-21 19:57:11.052927536 +0000
+@@ -41,7 +41,7 @@
     positive and N must be nonnegative.  This is a macro, not a
     function, so that it works correctly even when SIZE_MAX < N.  */
  

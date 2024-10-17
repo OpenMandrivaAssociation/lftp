@@ -13,7 +13,7 @@ Version:	4.9.2
 Release:	4
 Group:		Networking/File transfer
 License:	GPLv2+
-Url:		http://lftp.yar.ru/
+Url:		https://lftp.yar.ru/
 Source0:	http://lftp.yar.ru/ftp/%{name}-%{version}.tar.xz
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch

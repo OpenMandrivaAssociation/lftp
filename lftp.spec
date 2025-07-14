@@ -18,7 +18,7 @@ Source0:	http://lftp.yar.ru/ftp/%{name}-%{version}.tar.xz
 Patch0:		lftp-2.2.0-lftpgetmanpage.patch
 Patch1:		lftp-3.7.7-mdkconf.patch
 #Patch2:		lftp-4.8.4-clang.patch
-Patch3:		lftp-4.8.4-More-menu.patch
+#Patch3:		lftp-4.8.4-More-menu.patch
 Patch4:		lftp-4.4.0-gets.patch
 Patch5:		lftp-4.8.4-no-Lusrlib.patch
 

@@ -22,6 +22,11 @@ Patch3:		lftp-4.8.4-More-menu.patch
 Patch4:		lftp-4.4.0-gets.patch
 Patch5:		lftp-4.8.4-no-Lusrlib.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	pkgconfig(readline)
 BuildRequires:	pkgconfig(expat)

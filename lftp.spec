@@ -9,17 +9,17 @@
 
 Summary:	Commandline ftp client
 Name:		lftp
-Version:	4.9.2
-Release:	4
+Version:	4.9.3
+Release:	1
 Group:		Networking/File transfer
 License:	GPLv2+
 Url:		https://lftp.yar.ru/
 Source0:	http://lftp.yar.ru/ftp/%{name}-%{version}.tar.xz
-Patch0:		lftp-2.2.0-lftpgetmanpage.patch
-Patch1:		lftp-3.7.7-mdkconf.patch
-Patch2:		lftp-4.8.4-clang.patch
-Patch3:		lftp-4.8.4-More-menu.patch
-Patch4:		lftp-4.4.0-gets.patch
+# dropped (no longer applies): Patch0:		lftp-2.2.0-lftpgetmanpage.patch
+# dropped (no longer applies): Patch1:		lftp-3.7.7-mdkconf.patch
+# dropped (no longer applies): Patch2:		lftp-4.8.4-clang.patch
+# dropped (no longer applies): Patch3:		lftp-4.8.4-More-menu.patch
+# dropped (no longer applies): Patch4:		lftp-4.4.0-gets.patch
 Patch5:		lftp-4.8.4-no-Lusrlib.patch
 
 BuildRequires:	autoconf
